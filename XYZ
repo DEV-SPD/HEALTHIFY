@@ -1,0 +1,43 @@
+import streamlit as st
+from PIL import Image
+
+def calculator(weight, height):
+    try:
+     BMI = weight/height**2
+     st.text(BMI)
+    except:
+        st.text('INVALID')
+
+
+def bmi():
+ Tools = st.radio('TOOLS:', ['BMI', 'WAIST HIP RATIO'])
+ if Tools == 'BMI':
+     img = Image.open('BMI.jpeg')
+     st.image(img)
+     st.title('BMI CALCULATOR')
+     unit = st.radio('SELECT UNIT OF HEIGHT: ', ['Feet', 'Centimeters', 'Meters'])
+     if unit == 'Feet':
+         height = st.number_input('ENTER HEIGHT(in feet) : ')
+         weight = st.number_input('ENTER WEIGHT(in kg) : ')
+         if st.button('submit'):
+          calculator(weight, height)
+     elif unit == 'Centimeters':
+          height = st.number_input('ENTER HEIGHT(in cm):')
+          weight = st.number_input('ENTER WEIGHT(in ft):')
+          if st.button('submit'):
+              calculator(weight, height)
+     else:
+         height = st.number_input('ENTER HEIGHT(in m):')
+         weight = st.number_input('ENTER WEIGHT(in cm):')
+ else:
+     img = Image.open('WHR.jpg')
+     st.image(img)
+
+
+def main():
+ st.header('WELCOME TO HEALTHIFY')
+ if st.button('GO'):
+   bmi()
+
+if __name__ == '__main__' :
+    main()
